@@ -1,0 +1,14 @@
+#TODO: copy ddl.sql file to container and run ddl script
+version: '3'
+services:
+    db:
+       image: mysql:latest
+       container_name: "db"
+       restart: always
+       environment:
+           MYSQL_ROOT_PASSWORD: "root"
+           MYSQL_DATABASE: "db_linkurto"
+           MYSQL_USER: "admin"
+           MYSQL_PASSWORD: "senha321"
+       ports:
+           - 3306:3306

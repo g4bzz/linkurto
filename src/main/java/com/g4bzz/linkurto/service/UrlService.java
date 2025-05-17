@@ -24,7 +24,7 @@ public class UrlService {
     //TODO: create unit tests for this method
     public Url shortenUrl(String longUrl, EngineType engineType) {
         Engine engine = engineFactory.getEngine(engineType);
-        Optional<Url> searchedUrl = urlRepository.findByLongUrl(longUrl);
+        Optional<Url> searchedUrl = urlRepository.findByUrl(longUrl);
         if(searchedUrl.isPresent()) {
             return searchedUrl.get();
         }
@@ -48,4 +48,6 @@ public class UrlService {
         Optional<Url> searchedUrl = urlRepository.findByShortUrl(shortUrl);
         return searchedUrl.orElseGet(Url::new);
     }
+
+    //TODO: create method to get all expired urls and delete them from the database. Obs: use spring scheduler for this task.
 }

@@ -1,6 +1,5 @@
 package com.g4bzz.linkurto.exception;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 

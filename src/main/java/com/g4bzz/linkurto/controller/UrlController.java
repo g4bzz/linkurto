@@ -4,6 +4,7 @@ import com.g4bzz.linkurto.core.engines.EngineType;
 import com.g4bzz.linkurto.dto.UrlPostRequestBody;
 import com.g4bzz.linkurto.model.Url;
 import com.g4bzz.linkurto.service.UrlService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,8 @@ public class UrlController {
         this.urlService = urlService;
     }
 
-    //TODO: add validation for the request body
     @PostMapping("shorten")
-    public ResponseEntity<Url> shorten(@RequestBody UrlPostRequestBody urlPostRequestBody, @RequestParam(required = true, defaultValue = "HASHING") EngineType engineType) {
+    public ResponseEntity<Url> shorten(@RequestBody @Valid UrlPostRequestBody urlPostRequestBody, @RequestParam(required = true, defaultValue = "HASHING") EngineType engineType) {
         return ResponseEntity.ok(urlService.shortenUrl(urlPostRequestBody.getUrl(), engineType));
     }
 
@@ -33,4 +33,7 @@ public class UrlController {
         //301 Moved Permanently
         return ResponseEntity.status(301).location(URI.create(url.getUrl())).build();
     }
+
+    //TODO: add handle to 404 error (not found)
+    //TODO: add API documentation
 }

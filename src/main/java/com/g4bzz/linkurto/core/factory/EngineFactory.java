@@ -3,6 +3,7 @@ package com.g4bzz.linkurto.core.factory;
 import com.g4bzz.linkurto.core.engines.Engine;
 import com.g4bzz.linkurto.core.engines.EngineType;
 import com.g4bzz.linkurto.core.engines.HashingEngine;
+import com.g4bzz.linkurto.exception.BadRequestException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +13,7 @@ public class EngineFactory {
             case HASHING:
                 return new HashingEngine();
             default:
-                throw new RuntimeException("Unknown engine type");
+                throw new BadRequestException("Invalid engine type");
         }
     }
 }

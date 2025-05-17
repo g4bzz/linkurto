@@ -1,5 +1,7 @@
 package com.g4bzz.linkurto.core.engines;
 
+import com.g4bzz.linkurto.exception.BadRequestException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -19,7 +21,7 @@ public class HashingEngine extends Engine {
             for (byte b : digest) sb.append(String.format("%02x", b));
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new BadRequestException(e.getMessage());
         }
     }
 }

@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LinkurtoApplication {
-	//TODO: create exception handler
 	public static void main(String[] args) {
 		SpringApplication.run(LinkurtoApplication.class, args);
 	}
-
 }

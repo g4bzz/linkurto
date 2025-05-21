@@ -1,9 +1,6 @@
 package com.g4bzz.linkurto.handler;
 
-import com.g4bzz.linkurto.exception.BadRequestException;
-import com.g4bzz.linkurto.exception.BadRequestExceptionDetails;
-import com.g4bzz.linkurto.exception.EngineTypeExceptionDetails;
-import com.g4bzz.linkurto.exception.ValidationExceptionDetails;
+import com.g4bzz.linkurto.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -62,4 +60,14 @@ public class RestExceptionHandler{
                 .build(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException exception) {
+        return new ResponseEntity<>(NoResourceFoundExceptionDetails.builder()
+                .title("Resource was not found. Check the documentation")
+                .status(HttpStatus.NOT_FOUND.value())
+                .resourcePath(exception.getResourcePath())
+                .timestamp(LocalDateTime.now())
+                .developerMessage(exception.getClass().getName())
+                .build(), HttpStatus.NOT_FOUND);
+    }
 }

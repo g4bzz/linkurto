@@ -1,10 +1,12 @@
 package com.g4bzz.linkurto.exception;
 
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Map;
 
 @SuperBuilder
+@Getter
 public class ValidationExceptionDetails extends ExceptionDetails {
-    Map<String,String> fields;
+    private Map<String,String> fields;
 }

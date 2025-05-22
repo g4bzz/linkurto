@@ -6,7 +6,6 @@ import com.g4bzz.linkurto.core.factory.EngineFactory;
 import com.g4bzz.linkurto.model.Url;
 import com.g4bzz.linkurto.repository.UrlRepository;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,6 +47,4 @@ public class UrlService {
         Optional<Url> searchedUrl = urlRepository.findByShortUrl(shortUrl);
         return searchedUrl.orElseGet(Url::new);
     }
-
-    //TODO: create method to get all expired urls and delete them from the database. Obs: use spring scheduler for this task.
 }

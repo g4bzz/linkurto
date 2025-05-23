@@ -22,6 +22,9 @@ public class UrlService {
 
     //TODO: create unit tests for this method
     public Url shortenUrl(String longUrl, EngineType engineType) {
+        if (longUrl == null || longUrl.isEmpty()) {
+            throw new IllegalArgumentException("Long URL cannot be null or empty");
+        }
         Engine engine = engineFactory.getEngine(engineType);
         Optional<Url> searchedUrl = urlRepository.findByUrl(longUrl);
         if(searchedUrl.isPresent()) {
@@ -44,6 +47,9 @@ public class UrlService {
     }
 
     public Url resolve(String shortUrl) {
+        if (shortUrl == null || shortUrl.isEmpty()) {
+            throw new IllegalArgumentException("Short Url cannot be empty or null");
+        }
         Optional<Url> searchedUrl = urlRepository.findByShortUrl(shortUrl);
         return searchedUrl.orElseGet(Url::new);
     }

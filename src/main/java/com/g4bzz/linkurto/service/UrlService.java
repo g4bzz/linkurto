@@ -36,14 +36,14 @@ public class UrlService {
         while (urlRepository.findByShortUrl(shortUrl).isPresent() ) {
             shortUrl = engine.getUniqueKey(longUrl + UUID.randomUUID().toString());
         }
+
         Url url = Url.builder()
                 .url(longUrl)
                 .shortUrl(shortUrl)
                 .expirationDate(LocalDateTime.now().plusDays(engine.getDaysToExpire()))
                 .build();
-        urlRepository.save(url);
 
-        return url;
+        return urlRepository.save(url);
     }
 
     public Url resolve(String shortUrl) {

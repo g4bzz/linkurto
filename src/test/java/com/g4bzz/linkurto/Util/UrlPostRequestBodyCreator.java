@@ -1,0 +1,23 @@
+package com.g4bzz.linkurto.Util;
+
+import com.g4bzz.linkurto.dto.UrlPostRequestBody;
+
+public class UrlPostRequestBodyCreator {
+    public static UrlPostRequestBody createValidGithubUrlPostRequestBody(){
+        return UrlPostRequestBody.builder()
+                .url("https://github.com/")
+                .build();
+    }
+
+    public static UrlPostRequestBody createEmptyUrlPostRequestBody() {
+        return UrlPostRequestBody.builder()
+                .url("")
+                .build();
+    }
+
+    public static UrlPostRequestBody createNullUrlPostRequest(){
+        return UrlPostRequestBody.builder()
+                .url(null)
+                .build();
+    }
+}

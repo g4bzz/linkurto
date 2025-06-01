@@ -20,7 +20,6 @@ public class UrlService {
         this.engineFactory = engineFactory;
     }
 
-    //TODO: create unit tests for this method
     public Url shortenUrl(String longUrl, EngineType engineType) {
         if (longUrl == null || longUrl.isEmpty()) {
             throw new IllegalArgumentException("Long URL cannot be null or empty");

@@ -111,12 +111,13 @@ public class UrlController {
             )
         }
     )
-    public ResponseEntity<Url> resolve(@PathVariable String shortUrl) throws NoResourceFoundException {
+    public ResponseEntity<Object> resolve(@PathVariable String shortUrl) throws NoResourceFoundException {
         Url url = urlService.resolve(shortUrl);
         if (url == null || url.getId() == 0) {
             throw new NoResourceFoundException(HttpMethod.GET, MessageFormat.format("/{0}", shortUrl));
+        } else {
+            //301 Moved Permanently
+            return ResponseEntity.status(301).location(URI.create(url.getUrl())).build();
         }
-        //301 Moved Permanently
-        return ResponseEntity.status(301).location(URI.create(url.getUrl())).build();
     }
 }

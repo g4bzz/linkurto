@@ -20,4 +20,9 @@ public class UrlPostRequestBodyCreator {
                 .url(null)
                 .build();
     }
+    public static UrlPostRequestBody createInvalidUrlPostRequest(){
+        return UrlPostRequestBody.builder()
+                .url("htp:/www.github.test")
+                .build();
+    }
 }

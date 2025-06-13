@@ -1,0 +1,29 @@
+@if(this.shortUrl){
+<div class="text-center fs-5 mb-2">
+  Your short URL is ready!
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-success" role="alert">
+      This Short Url is valid until {{getExpirationDateFormated()}}.
+    </div>
+  </div>
+</div>
+<div class="input-group mb-3">
+  <input type="text" class="form-control" disabled [value]="this.shortUrl.shortUrl" aria-label="Short URL"
+    aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" (click)="this.copyShortUrlToClipboard()" type="button"
+    id="button-addon2">Copy
+    Short URL</button>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <button [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-dark">Shorten another URL</button>
+</div>
+} @else {
+<div class="alert alert-danger m-2" role="alert">
+  An application error ocurred.
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <button [routerLink]="['/']" routerLinkActive="router-link-active" class="btn btn-dark">Shorten another URL</button>
+</div>
+}

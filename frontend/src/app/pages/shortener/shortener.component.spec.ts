@@ -8,9 +8,8 @@ describe('ShortenerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShortenerComponent]
-    })
-    .compileComponents();
+      imports: [ShortenerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShortenerComponent);
     component = fixture.componentInstance;

@@ -23,6 +23,7 @@
     "@ng-icons/core": "^28.1.0",
     "@ng-icons/heroicons": "^32.0.0",
     "bootstrap": "^5.3.6",
+    "ngx-captcha": "^13.0.0",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

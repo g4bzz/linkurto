@@ -46,6 +46,7 @@ public class UrlController {
                         value = """
                                 {
                                   "url": "https://www.tests.com/test123"
+                                  "recaptchaToken": "test123",
                                 }"""),
             })
         ),
@@ -79,7 +80,7 @@ public class UrlController {
         }
     )
     public ResponseEntity<UrlPostResponseBody> shorten(@RequestBody @Valid UrlPostRequestBody urlPostRequestBody, @RequestParam(defaultValue = "HASHING") EngineType engineType) {
-        Url shortenedUrl = urlService.shortenUrl(urlPostRequestBody.getUrl(), engineType);
+        Url shortenedUrl = urlService.shortenUrl(urlPostRequestBody.getUrl(), urlPostRequestBody.getRecaptchaToken(), engineType);
         UrlPostResponseBody urlPostResponseBody = UrlMapper.INSTANCE.toUrlPostResponseBody(shortenedUrl);
         return new ResponseEntity<>(urlPostResponseBody, HttpStatus.CREATED);
     }

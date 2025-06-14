@@ -1,6 +1,7 @@
 package com.g4bzz.linkurto.handler;
 
 import com.g4bzz.linkurto.exception.*;
+import com.g4bzz.linkurto.exception.enums.RecaptchaErrorEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -11,6 +12,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -69,5 +71,20 @@ public class RestExceptionHandler{
                 .timestamp(LocalDateTime.now())
                 .developerMessage(exception.getClass().getName())
                 .build(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(RecaptchaValidationException.class)
+    public ResponseEntity<Object> handleRecaptchaValidationException(RecaptchaValidationException exception) {
+        List<String> errorMessages = exception.getErrorCodes().stream()
+                .map(code -> RecaptchaErrorEnum.valueOf(code.replace("-", "_").toUpperCase()).getMessage())
+                .toList();
+
+        return new ResponseEntity<>(RecaptchaValidationExceptionDetails.builder()
+                .title("Invalid Recaptcha. Please try again")
+                .status(HttpStatus.BAD_REQUEST.value())
+                .timestamp(LocalDateTime.now())
+                .developerMessage(exception.getClass().getName())
+                .errorMessages(errorMessages)
+                .build(), HttpStatus.BAD_REQUEST);
     }
 }

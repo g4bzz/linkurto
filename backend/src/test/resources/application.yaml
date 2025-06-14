@@ -22,3 +22,7 @@ spring:
   sql:
     init:
       mode: always
+google:
+  recaptcha-v2:
+    secret-key: test
+    url: https://www.google.com/recaptcha/api/siteverify

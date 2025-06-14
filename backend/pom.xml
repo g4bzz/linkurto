@@ -86,7 +86,12 @@
 			<version>${org.projectlombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 	<profiles>
 		<profile>
 			<id>unit-tests</id>

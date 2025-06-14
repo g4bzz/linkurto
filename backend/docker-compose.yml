@@ -13,6 +13,6 @@ services:
            MYSQL_USER: "admin"
            MYSQL_PASSWORD: "senha321"
        ports:
-           - 3306:3306
+           - "3306:3306"
 volumes:
   db-data:

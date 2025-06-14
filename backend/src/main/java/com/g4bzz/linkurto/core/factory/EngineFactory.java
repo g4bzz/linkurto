@@ -8,11 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class EngineFactory {
     public Engine getEngine(EngineType type){
-        switch(type){
-            case HASHING:
-                return new HashingEngine();
-            default:
-                throw new IllegalArgumentException("Invalid engine type");
-        }
+        return switch (type) {
+            case HASHING -> new HashingEngine();
+            default -> throw new IllegalArgumentException("Invalid engine type");
+        };
     }
 }

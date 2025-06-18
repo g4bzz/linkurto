@@ -8,6 +8,7 @@ import {
 import ShortUrl from '../../_models/short-url';
 import { ShortUrlService } from '../../_services/short-url.service';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-shortened',
   standalone: true,
@@ -18,19 +19,10 @@ import { RouterLink } from '@angular/router';
 export class ShortenedComponent implements OnInit, OnDestroy {
   shortUrl: ShortUrl | undefined;
   shortUrlService: ShortUrlService = inject(ShortUrlService);
-
+  toastr: ToastrService = inject(ToastrService);
+  baseUrl: string = window.location.origin + '/';
   ngOnInit(): void {
     this.shortUrl = this.shortUrlService.getShortUrl();
-
-    //REMOVE
-
-    // this.shortUrl = {
-    //   expirationDate: new Date(2025, 7, 5),
-    //   longUrl: 'https:github.com',
-    //   shortUrl: 'https:linkurto.com/h2y37sgt',
-    // };
-
-    //this.shortUrl = undefined;
   }
 
   //Garante que o método será executado quando os seguintes eventos do navegador forem executados:
@@ -42,14 +34,17 @@ export class ShortenedComponent implements OnInit, OnDestroy {
 
   copyShortUrlToClipboard() {
     if (this.shortUrl) {
-      navigator.clipboard.writeText(this.shortUrl.shortUrl);
+      navigator.clipboard.writeText(this.baseUrl + this.shortUrl.shortUrl);
+      this.toastr.success('Url copied to clipboard succesfully');
     }
   }
   getExpirationDateFormated() {
     let expirationDate: Date = new Date();
 
     if (this.shortUrl) {
-      expirationDate = this.shortUrl.expirationDate;
+      expirationDate = new Date(
+        this.shortUrl.expirationDate.toString().replace('T', ' '),
+      );
     }
 
     return expirationDate.toLocaleString('en-CA', {

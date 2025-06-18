@@ -1,5 +1,5 @@
 export default interface ShortUrl {
   shortUrl: string;
-  longUrl: string;
+  url: string;
   expirationDate: Date;
 }

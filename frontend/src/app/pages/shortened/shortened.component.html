@@ -10,8 +10,8 @@
   </div>
 </div>
 <div class="input-group mb-3">
-  <input type="text" class="form-control" disabled [value]="this.shortUrl.shortUrl" aria-label="Short URL"
-    aria-describedby="button-addon2">
+  <input type="text" class="form-control" disabled [value]="(this.baseUrl + this.shortUrl.shortUrl)"
+    aria-label="Short URL" aria-describedby="button-addon2">
   <button class="btn btn-outline-secondary" (click)="this.copyShortUrlToClipboard()" type="button"
     id="button-addon2">Copy
     Short URL</button>

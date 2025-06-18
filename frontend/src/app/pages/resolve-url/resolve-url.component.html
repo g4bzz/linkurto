@@ -1,0 +1,16 @@
+@if (this.retrievedUrl) {
+<div class="text-center fs-5 mb-2">
+  We are redirecting you to this page...
+</div>
+<div class="row">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control text-center" disabled [value]="this.retrievedUrl.url" aria-label="Short URL"
+      aria-describedby="button-addon2">
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a class="btn btn-primary" [href]="this.redirectUrl">Let's go</a>
+    </div>
+  </div>
+</div>
+}

@@ -11,6 +11,4 @@ export const tokenGuard: CanActivateFn = () => {
   } else {
     return router.navigate(['']);
   }
-  // REMOVE
-  //return true;
 };

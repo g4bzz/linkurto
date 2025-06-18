@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 import java.net.URI;
 import java.text.MessageFormat;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/")
 public class UrlController {
@@ -30,7 +30,6 @@ public class UrlController {
     public UrlController(UrlService urlService) {
         this.urlService = urlService;
     }
-
     @PostMapping("shorten")
     @Operation(
         summary = "Shorten a URL",
@@ -84,7 +83,6 @@ public class UrlController {
         UrlPostResponseBody urlPostResponseBody = UrlMapper.INSTANCE.toUrlPostResponseBody(shortenedUrl);
         return new ResponseEntity<>(urlPostResponseBody, HttpStatus.CREATED);
     }
-
     @GetMapping("/{shortUrl}")
     @Operation(
         summary = "Resolve a URL",
@@ -119,6 +117,17 @@ public class UrlController {
         } else {
             //301 Moved Permanently
             return ResponseEntity.status(301).location(URI.create(url.getUrl())).build();
+        }
+    }
+
+    @GetMapping("/exists/{shortUrl}")
+    public ResponseEntity<UrlPostResponseBody> shortUrlExists(@PathVariable String shortUrl) throws NoResourceFoundException {
+        Url url = urlService.resolve(shortUrl);
+        if (url == null || url.getId() == 0) {
+            throw new NoResourceFoundException(HttpMethod.GET, MessageFormat.format("/{0}", shortUrl));
+        } else {
+            UrlPostResponseBody urlPostResponseBody = UrlMapper.INSTANCE.toUrlPostResponseBody(url);
+            return new ResponseEntity<>(urlPostResponseBody, HttpStatus.OK);
         }
     }
 }

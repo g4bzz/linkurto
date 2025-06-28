@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/4f26ca06-2e52-4b34-b1a4-1457b48578a0)# Linkurto
+# Linkurto
 
 > Linkurto é um encurtador básico de links, desenvolvido com Spring, Angular e MySQL.
 

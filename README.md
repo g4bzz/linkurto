@@ -1,4 +1,4 @@
-# Linkurto
+![image](https://github.com/user-attachments/assets/4f26ca06-2e52-4b34-b1a4-1457b48578a0)# Linkurto
 
 > Linkurto é um encurtador básico de links, desenvolvido com Spring, Angular e MySQL.
 
@@ -108,15 +108,17 @@ A interface do sistema possui 3 telas que representam as 3 etapas do processo de
 
 ### Envio do link original
 
-![]()
+![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/enviando-link.png)
+
+![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/validacao-link.png)
 
 ### Obtenção do link encurtado
 
-![]()
+![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/link-encurtado.png)
 
 ### Acessando o link encurtado
 
-![]()
+![imge](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/acessando-link.png)
 
 ## Próximos passos
 

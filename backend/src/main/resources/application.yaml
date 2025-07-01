@@ -19,3 +19,9 @@ google:
   recaptcha-v2:
     secret-key: ${RECAPTCHA_SECRET_KEY}
     url: https://www.google.com/recaptcha/api/siteverify
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, metrics, health, prometheus

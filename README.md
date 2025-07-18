@@ -6,6 +6,8 @@
 ![Spring Boot Version](https://img.shields.io/badge/Spring_Boot-3.4.5-6db33f)
 ![Angular CLI Version](https://img.shields.io/badge/Angular-18.2.19-red)
 ![MySQL Version](https://img.shields.io/badge/MySQL-9.3.0-blue)
+![Prometheus](https://img.shields.io/badge/Prometheus-v2.53.5-f15a22)
+![Grafana](https://img.shields.io/badge/Grafana-12.0.2-FDDA0D)
 
 ## Características
 
@@ -118,14 +120,26 @@ A interface do sistema possui 3 telas que representam as 3 etapas do processo de
 
 ### Acessando o link encurtado
 
-![imge](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/acessando-link.png)
+![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/acessando-link.png)
+
+## Observabilidade
+
+Para poder visualizar as métricas da aplicação, utilizou-se o Grafana com auxílio do Prometheus como datasource. Ambos estão sendo executados a partir do arquivo Docker Compose.
+
+A configuração do datasource é simples, basta criar um novo e informar o URL do Prometheus.
+
+A dashboard usada para observar as métricas foi a [JVM (Micrometer)](https://grafana.com/grafana/dashboards/4701-jvm-micrometer/).
+
+![image]()
+
+![image]()
 
 ## Próximos passos
 
 ### DevOps
 
-- [ ] Adicionar o Prometheus ao projeto;
-- [ ] Adicionar o Grafana ao projeto;
+- [x] Adicionar o Prometheus ao projeto;
+- [x] Adicionar o Grafana ao projeto;
 - [ ] Implementar CI/CD;
 
 ### Backend

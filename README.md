@@ -110,17 +110,17 @@ A interface do sistema possui 3 telas que representam as 3 etapas do processo de
 
 ### Envio do link original
 
-![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/enviando-link.png)
+![Envio do link original](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/enviando-link.png)
 
-![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/validacao-link.png)
+![Validação do Link](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/validacao-link.png)
 
 ### Obtenção do link encurtado
 
-![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/link-encurtado.png)
+![Obtenção do link encurtado](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/link-encurtado.png)
 
 ### Acessando o link encurtado
 
-![image](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/acessando-link.png)
+![Acessando o link encurtado](https://raw.githubusercontent.com/g4bzz/linkurto/9ac28238f06712ff4f0bf9d0e6ee1a8a98334e83/assets/acessando-link.png)
 
 ## Observabilidade
 
@@ -130,9 +130,9 @@ A configuração do datasource é simples, basta criar um novo e informar o URL 
 
 A dashboard usada para observar as métricas foi a [JVM (Micrometer)](https://grafana.com/grafana/dashboards/4701-jvm-micrometer/).
 
-![image]()
+![Importando o Dashbord JVM (Micrometer)](https://raw.githubusercontent.com/g4bzz/linkurto/6bd10f2132502ea62146c1a9cb908df3f1fae4c2/assets/importando-dashboard-grafana.png)
 
-![image]()
+![Dashbord JVM (Micrometer)](https://raw.githubusercontent.com/g4bzz/linkurto/6bd10f2132502ea62146c1a9cb908df3f1fae4c2/assets/dashboard-grafana.png)
 
 ## Próximos passos
 

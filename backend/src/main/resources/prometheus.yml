@@ -12,4 +12,4 @@ scrape_configs:
     metrics_path: "/actuator/prometheus"
     static_configs:
       # host url + app port
-      - targets: [ '172.17.0.1:8080' ]
+      - targets: [ 'linkurto:8088' ]

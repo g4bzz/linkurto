@@ -40,10 +40,8 @@ docker compose up -d
 
 ### Executar testes unitários
 
-É necessário ter instalado o Maven.
-
 ```sh
-mvn test -Punit-tests
+./mvnw test -Punit-tests
 ```
 
 ### Executar testes de integração
@@ -51,7 +49,7 @@ mvn test -Punit-tests
 É necessário ter instalado o Maven.
 
 ```sh
-mvn test -Pintegration-tests
+./mvnw test -Pintegration-tests
 ```
 
 ### Documentação (Swagger)
@@ -133,25 +131,3 @@ A dashboard usada para observar as métricas foi a [JVM (Micrometer)](https://gr
 ![Importando o Dashbord JVM (Micrometer)](https://raw.githubusercontent.com/g4bzz/linkurto/6bd10f2132502ea62146c1a9cb908df3f1fae4c2/assets/importando-dashboard-grafana.png)
 
 ![Dashbord JVM (Micrometer)](https://raw.githubusercontent.com/g4bzz/linkurto/6bd10f2132502ea62146c1a9cb908df3f1fae4c2/assets/dashboard-grafana.png)
-
-## Próximos passos
-
-### DevOps
-
-- [x] Adicionar o Prometheus ao projeto;
-- [x] Adicionar o Grafana ao projeto;
-- [ ] Implementar CI/CD;
-
-### Backend
-
-- [ ] Implementar CRUD de usuários;
-- [ ] Implementar autenticação;
-- [ ] Atualizar endpoint de encurtamento para permitir a customização do link curto mediante login;
-- [ ] Implementar módulo de gestão de links;
-
-### Frontend
-
-- [ ] Adicionar testes unitários;
-- [ ] Implementar cadastro/login de usuário;
-- [ ] Atualizar tela de envio do link original para permitir a customização do link encurtado;
-- [ ] Implementar tela de gestão de links encurtados.

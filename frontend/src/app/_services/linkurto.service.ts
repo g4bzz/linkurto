@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import UrlInput from '../_models/url-input';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { map, Observable } from 'rxjs';
 import ShortUrl from '../_models/short-url';
 

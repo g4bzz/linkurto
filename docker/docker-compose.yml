@@ -1,0 +1,84 @@
+version: '3'
+services:
+    db_linkurto:
+      image: mysql:latest
+      container_name: "db_linkurto"
+      restart: always
+      volumes:
+        - ../backend/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+        - db_linkurto-data:/var/lib/mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+          MYSQL_DATABASE: ${DB_DATABASE:-db_linkurto}
+          MYSQL_USER: ${DB_USERNAME:-admin}
+          MYSQL_PASSWORD: ${DB_PASSWORD:-senha321}
+      ports:
+          - "3306:3306"
+      networks:
+        - linkurto-net 
+      healthcheck:
+          test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+          timeout: 20s
+          retries: 10
+
+    linkurto:
+      container_name: linkurto
+      build:
+        context: ..
+        dockerfile: docker/backend/Dockerfile
+      ports:
+        - "8088:8088"
+      environment:
+        - SPRING_PROFILES_ACTIVE=dev
+        - SPRING_DATASOURCE_URL=jdbc:mysql://db_linkurto:3306/${DB_DATABASE:-db_linkurto}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        - SPRING_DATASOURCE_USERNAME=${DB_USERNAME:-admin}
+        - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD:-senha321}
+        - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
+      networks:
+        - linkurto-net
+      depends_on:
+        db_linkurto:
+          condition: service_healthy
+
+    prometheus:
+      image: prom/prometheus:v2.53.5
+      container_name: prometheus
+      volumes:
+        - "../backend/src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml"
+      command:
+        - "--config.file=/etc/prometheus/prometheus.yml"
+      ports:
+        - "9091:9090"
+      networks:
+        - linkurto-net 
+
+    grafana:
+      image: grafana/grafana:12.0.2
+      container_name: grafana
+      ports:
+        - "3000:3000"
+      networks:
+        - linkurto-net 
+
+    frontend:
+      container_name: linkurto-frontend
+      build:
+        context: ..
+        dockerfile: docker/frontend/Dockerfile
+        args:
+          - RECAPTCHA_SITE_KEY=${RECAPTCHA_SITE_KEY}
+          - GITHUB_URL=${GITHUB_URL}
+          - LINKEDIN_URL=${LINKEDIN_URL}
+          - LINKURTO_SERVER_URL=${LINKURTO_SERVER_URL}
+      ports:
+        - "80:80"
+      networks:
+        - linkurto-net
+      depends_on:
+        - linkurto
+networks:
+  linkurto-net:
+    driver: bridge
+
+volumes:
+  db_linkurto-data:

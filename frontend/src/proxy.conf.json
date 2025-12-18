@@ -1,8 +1,10 @@
 {
   "/api": {
-    "target": "http://localhost:8080",
+    "target": "http://linkurto:8088",
     "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": { "^/api": "" }
+    "changeOrigin": false,
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }

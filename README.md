@@ -18,67 +18,57 @@
 
 ## Utilização
 
-### Backend
+### Como executar o projeto (via docker compose)
+#### Pré requisitos
+- Docker instalado com docker-compose;
+- arquivo .env no diretório **docker** seguindo o padrão do arquivo [.env.example](/docker/.env.example).
 
-#### Observação:
-
-A única variável de ambiente a ser configurada para o backend é a **RECAPTCHA_SECRET_KEY**.
-
-No meu caso, eu inseri o seu valor nas configurações do projeto na IDE IntelliJ. Para as demais variáveis, verifique o arquivo **application.yaml** e altere conforme for necessário.
+> Observação: a aplicação está toda configurada para rodar no localhost.
 
 ```sh
 
-# Entre na pasta backend
-cd backend
+# Entre na pasta docker
+cd docker
 
-# Inicie o serviço do banco de dados
-docker compose up -d
+# execute o arquivo compose com o parâmetro de build para gerar as imagens do backend e frontend de acordo com os seus respectivos arquivos Dockerfile
 
-# Execute o projeto com a sua IDE preferida
+docker compose up --build
+
+# Portas dos containers:
+# - Frontend: 80 (localhost)
+# - Backend: 8088 (localhost:8088)
+# - Mysql: 3306 (localhost:3306) 
+# - Grafana: 3000 (localhost:3000)
 
 ```
 
 ### Executar testes unitários
 
 ```sh
+cd backend
+
 ./mvnw test -Punit-tests
 ```
 
 ### Executar testes de integração
 
-É necessário ter instalado o Maven.
-
 ```sh
+cd backend
+
 ./mvnw test -Pintegration-tests
 ```
 
 ### Documentação (Swagger)
 
-A documentação completa da API pode ser acessada em: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
-
-### Frontend
-
-```sh
-
-# Entre na pasta frontend
-cd frontend
-
-# Crie o arquivo contendo as variáveis de ambiente
-cp src/enviroments/enviroment.example.ts src/enviroments/enviroment.development.ts
-
-# Instale as dependências
-npm install
-
-# Rode o frontend
-ng serve
-
-```
+A documentação completa da API pode ser acessada em: [http://localhost:8088/swagger-ui/index.html](http://localhost:8088/swagger-ui/index.html).
 
 ## Backend
 
 O backend da aplicação foi construído utilizando Spring + Java 17, contando com validação nas APIs, testes unitários e testes de integração utilizando JUnit e Mockito.
 
 Utilizou-se das boas práticas de programação como SOLID e Clean Code, bem como o emprego de alguns padrões de projeto. Com isso, foi possível desenvolver o projeto de maneira que o mesmo permitisse evoluções.
+
+Para gerar os links encurtados, foi implementado uma lógica de hash baseada no algoritmo MD5 e com uma trativa especial para garantir que os códigos gerados não sejam repetidos. Por conta da forma na qual o sistema foi projeto, outra estratégia de geração de link curto pode ser facilmente implementada e adicionada ao sistema, desde que a nova classe estenda a classe base **Engine**.
 
 A primeira versão do sistema se mantém com um escopo reduzido, dispensando autenticação e gerenciamento dos links gerados. Desta forma, essas e outras funcionalidades serão implementadas futuramente.
 
@@ -98,7 +88,7 @@ CREATE TABLE tb_url(
 );
 ```
 
-A API de encurtamento possui integração com o sistema de captcha do google (reCAPTCHA), desta forma, só é possível encurtar um link mediante a posse de um token gerado através da resolução do desafio de captcha.
+A API de encurtamento possui integração com o sistema de captcha do google (reCAPTCHA v2), desta forma, só é possível encurtar um link mediante a posse de um token gerado através da resolução do desafio de captcha.
 
 ## Frontend
 
@@ -124,7 +114,7 @@ A interface do sistema possui 3 telas que representam as 3 etapas do processo de
 
 Para poder visualizar as métricas da aplicação, utilizou-se o Grafana com auxílio do Prometheus como datasource. Ambos estão sendo executados a partir do arquivo Docker Compose.
 
-A configuração do datasource é simples, basta criar um novo e informar o URL do Prometheus.
+A configuração do datasource é simples, basta criar um novo e informar o URL do Prometheus (http://prometheus:9090).
 
 A dashboard usada para observar as métricas foi a [JVM (Micrometer)](https://grafana.com/grafana/dashboards/4701-jvm-micrometer/).
 

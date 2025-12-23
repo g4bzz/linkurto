@@ -34,6 +34,7 @@ services:
         - SPRING_DATASOURCE_USERNAME=${DB_USERNAME:-admin}
         - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD:-senha321}
         - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY}
+        - EXPIRED_URLS_CLEANING_INTERVAL_IN_MINUTES=${EXPIRED_URLS_CLEANING_INTERVAL_IN_MINUTES}
       networks:
         - linkurto-net
       depends_on:
@@ -51,6 +52,8 @@ services:
         - "9091:9090"
       networks:
         - linkurto-net 
+      depends_on:
+        - linkurto
 
     grafana:
       image: grafana/grafana:12.0.2
@@ -59,6 +62,8 @@ services:
         - "3000:3000"
       networks:
         - linkurto-net 
+      depends_on:
+        - linkurto
 
     frontend:
       container_name: linkurto-frontend
@@ -70,6 +75,9 @@ services:
           - GITHUB_URL=${GITHUB_URL}
           - LINKEDIN_URL=${LINKEDIN_URL}
           - LINKURTO_SERVER_URL=${LINKURTO_SERVER_URL}
+          - LINKURTO_FRONT_URL=${LINKURTO_FRONT_URL}
+      environment:
+        - LINKURTO_FRONT_URL=${LINKURTO_FRONT_URL}
       ports:
         - "80:80"
       networks:

@@ -14,13 +14,13 @@ public class ScheduledTasks {
     private final UrlRepository urlRepository;
     private final Logger log;
 
-    public ScheduledTasks( UrlRepository urlRepository) {
+    public ScheduledTasks(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
         this.log = org.slf4j.LoggerFactory.getLogger(this.getClass());
     }
 
     // Short time interval for testing purposes
-    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)
+    @Scheduled(fixedRateString = "${tasks.expired-urls-cleaning-interval-in-minutes}", timeUnit = TimeUnit.MINUTES)
     public void cleanExpiredUrls() {
         LocalDateTime now = LocalDateTime.now();
         log.info("Cleaning up expired urls");

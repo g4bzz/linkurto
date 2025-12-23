@@ -19,6 +19,8 @@ google:
   recaptcha-v2:
     secret-key: ${RECAPTCHA_SECRET_KEY}
     url: https://www.google.com/recaptcha/api/siteverify
+tasks:
+  expired-urls-cleaning-interval-in-minutes: ${EXPIRED_URLS_CLEANING_INTERVAL_IN_MINUTES}
 server:
   port: 8088
 management:

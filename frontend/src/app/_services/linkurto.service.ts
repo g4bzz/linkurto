@@ -10,9 +10,7 @@ import ShortUrl from '../_models/short-url';
 })
 export class LinkurtoService {
   private client: HttpClient = inject(HttpClient);
-  private linkurto_url = environment.production
-    ? environment.linkurto_server_url
-    : environment.linkurto_proxy_server_url;
+  private linkurto_url = environment.linkurto_proxy_server_url;
 
   shortenLongUrl(urlRequestBody: UrlInput): Observable<ShortUrl> {
     return this.client

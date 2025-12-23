@@ -9,6 +9,7 @@ import ShortUrl from '../../_models/short-url';
 import { ShortUrlService } from '../../_services/short-url.service';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-shortened',
   standalone: true,
@@ -20,7 +21,7 @@ export class ShortenedComponent implements OnInit, OnDestroy {
   shortUrl: ShortUrl | undefined;
   shortUrlService: ShortUrlService = inject(ShortUrlService);
   toastr: ToastrService = inject(ToastrService);
-  baseUrl: string = window.location.origin + '/';
+  baseUrl: string = environment.linkurto_front_url;
   ngOnInit(): void {
     this.shortUrl = this.shortUrlService.getShortUrl();
   }

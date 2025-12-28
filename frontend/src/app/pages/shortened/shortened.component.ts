@@ -35,10 +35,46 @@ export class ShortenedComponent implements OnInit, OnDestroy {
 
   copyShortUrlToClipboard() {
     if (this.shortUrl) {
-      navigator.clipboard.writeText(this.baseUrl + this.shortUrl.shortUrl);
-      this.toastr.success('Url copied to clipboard succesfully');
+      const fullUrl = this.baseUrl + this.shortUrl.shortUrl;
+
+      if (typeof navigator.clipboard !== 'undefined') {
+        navigator.clipboard.writeText(fullUrl).then(() => {
+          this.toastr.success('Url copied to clipboard successfully');
+        }).catch(err => {
+          this.fallbackCopyTextToClipboard(fullUrl);
+        });
+      } else {
+        this.fallbackCopyTextToClipboard(fullUrl);
+      }
     }
   }
+
+  private fallbackCopyTextToClipboard(text: string) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+
+    textArea.focus();
+    textArea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        this.toastr.success('Url copied to clipboard successfully');
+      } else {
+        this.toastr.error('Unable to copy URL');
+      }
+    } catch (err) {
+      this.toastr.error('Error copying URL');
+    }
+
+    document.body.removeChild(textArea);
+  }
+
   getExpirationDateFormated() {
     let expirationDate: Date = new Date();
 
